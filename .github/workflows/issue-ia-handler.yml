@@ -1,0 +1,39 @@
+name: IA-Issue-Handler
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+
+jobs:
+  handle-ia-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Run OpenCode
+        uses: anomalyco/opencode/github@latest
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        with:
+          model: anthropic/claude-sonnet-4-20250514
+          agent: issue-handler
+          prompt: |
+            You are the issue-handler agent. 
+            1. Check if the issue description or comment mentions "@IA" (case insensitive).
+            2. If yes, perform the following:
+               a. Analyze the issue and create a plan in `plan.md`.
+               b. Create a new branch based on the issue number and title (e.g., `issue-1-short-title`).
+               c. Implement the solution according to the plan.
+               d. Commit and push changes to the branch.
+               e. Create a pull request for human review.
+               f. Post a comment on the issue explaining the solution generated.
+            3. If no mention of "@IA", do nothing.
