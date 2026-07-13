@@ -1,0 +1,13 @@
+Actúa como analista de software. Quiero construir el MVP de un proyect starter de equipo. Stack obligatorio: backend Node + Express (JavaScript, SIN TypeScript,
+sin base de datos: los datos viven en un array en memoria), frontend HTML, CSS y
+JavaScript vanilla en un solo index.html servido por Express.
+
+Funcionalidad del MVP: crear tarea (título + persona asignada), listar tareas,
+marcar como completada, borrar tarea, y filtrar por estado (todas / pendientes /
+completadas).
+
+Escríbeme un SPEC.md con estas secciones: Visión (2 líneas), Alcance del MVP
+(qué entra y qué NO entra), Modelo de datos (campos de una tarea), API REST
+(tabla de endpoints con método, ruta, cuerpo y respuesta), Interfaz (qué se ve
+en pantalla), Criterios de aceptación (lista verificable), Restricciones
+técnicas. Hazlo concreto y sin adornos: es un documento de trabajo.
